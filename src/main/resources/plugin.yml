@@ -1,0 +1,8 @@
+name: BetterWithPlugins
+version: '${version}'
+main: com.github.industrialcraft.betterwithplugins.BWPMain
+api-version: 1.18
+authors: [ mmm1245, YTBlockman ]
+commands:
+  bwpgive:
+    usage: /bwpgive <item> [count]
