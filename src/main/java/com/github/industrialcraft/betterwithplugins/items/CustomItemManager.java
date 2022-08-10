@@ -1,7 +1,6 @@
 package com.github.industrialcraft.betterwithplugins.items;
 
 import com.github.industrialcraft.betterwithplugins.BWPMain;
-import com.github.industrialcraft.betterwithplugins.items.handler.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,9 +17,7 @@ public class CustomItemManager implements Listener {
             CustomItem customItem = BWPMain.getItemRegistry().fromStack(player.getItemInHand());
             if(customItem == null)
                 return;
-            if(customItem instanceof IAttackHandler attackHandler){
-                attackHandler.onAttack(event, player);
-            }
+            customItem.onAttack(event, player);
         }
     }
     @EventHandler
@@ -28,38 +25,29 @@ public class CustomItemManager implements Listener {
         CustomItem customItem = BWPMain.getItemRegistry().fromStack(event.getItem());
         if(customItem == null)
             return;
-        if(customItem instanceof IEatHandler eatHandler){
-            eatHandler.onEat(event);
-        }
+        customItem.onEat(event);
     }
     @EventHandler
     public void onEntityUse(PlayerInteractEntityEvent event){
         CustomItem customItem = BWPMain.getItemRegistry().fromStack(event.getPlayer().getInventory().getItem(event.getHand()));
         if(customItem == null)
             return;
-        if(customItem instanceof IEntityUseHandler entityUseHandler){
-            entityUseHandler.onEntityUse(event);
-        }
+        customItem.onEntityUse(event);
     }
     @EventHandler
     public void onPlaceBlock(BlockPlaceEvent event){
         CustomItem customItem = BWPMain.getItemRegistry().fromStack(event.getPlayer().getInventory().getItem(event.getHand()));
         if(customItem == null)
             return;
-        if(customItem instanceof IPlaceHandler placeHandler){
-            placeHandler.onPlace(event);
-        }
+        customItem.onPlace(event);
     }
     @EventHandler
     public void onItemUse(PlayerInteractEvent event){
-        if(event.hasItem() && event.hasBlock()) {
+        if(event.hasItem()) {
             CustomItem customItem = BWPMain.getItemRegistry().fromStack(event.getPlayer().getInventory().getItem(event.getHand()));
-
             if (customItem == null)
                 return;
-            if (customItem instanceof IUseHandler useHandler) {
-                useHandler.onItemUse(event);
-            }
+            customItem.onItemUse(event);
         }
     }
 }

@@ -6,3 +6,5 @@ authors: [ mmm1245, YTBlockman ]
 commands:
   bwpgive:
     usage: /bwpgive <item> [count]
+  bwpsetblock:
+    usage: /bwpsetblock <block>

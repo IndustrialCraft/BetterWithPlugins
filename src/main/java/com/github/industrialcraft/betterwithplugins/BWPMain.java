@@ -1,6 +1,9 @@
 package com.github.industrialcraft.betterwithplugins;
 
+import com.github.industrialcraft.betterwithplugins.block.CustomBlockManager;
+import com.github.industrialcraft.betterwithplugins.block.CustomBlockRegistry;
 import com.github.industrialcraft.betterwithplugins.commands.CustomGiveCommand;
+import com.github.industrialcraft.betterwithplugins.commands.CustomSetblockCommand;
 import com.github.industrialcraft.betterwithplugins.gui.GUIManager;
 import com.github.industrialcraft.betterwithplugins.items.CustomItemManager;
 import com.github.industrialcraft.betterwithplugins.items.CustomItemRegistry;
@@ -14,6 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class BWPMain extends JavaPlugin {
     private Keys keys;
     private CustomItemRegistry itemRegistry;
+    private CustomBlockRegistry blockRegistry;
     private CustomModelDataAssigner customModelDataAssigner;
     @Override
     public void onEnable() {
@@ -21,10 +25,13 @@ public final class BWPMain extends JavaPlugin {
         this.customModelDataAssigner = new CustomModelDataAssigner();
         this.customModelDataAssigner.load(getConfig());
         this.itemRegistry = new CustomItemRegistry();
+        this.blockRegistry = new CustomBlockRegistry();
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new GUIManager(), this);
         pm.registerEvents(new CustomItemManager(), this);
+        pm.registerEvents(new CustomBlockManager(), this);
         new CustomGiveCommand().register("bwpgive");
+        new CustomSetblockCommand().register("bwpsetblock");
         new Test();
     }
 
@@ -38,6 +45,9 @@ public final class BWPMain extends JavaPlugin {
     }
     public static CustomItemRegistry getItemRegistry(){
         return getInstance().itemRegistry;
+    }
+    public static CustomBlockRegistry getBlockRegistry(){
+        return getInstance().blockRegistry;
     }
     public static BWPMain getInstance(){
         return JavaPlugin.getPlugin(BWPMain.class);
