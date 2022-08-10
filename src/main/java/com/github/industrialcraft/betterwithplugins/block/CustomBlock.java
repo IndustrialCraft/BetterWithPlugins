@@ -7,6 +7,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.TileState;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -30,6 +31,7 @@ public class CustomBlock {
         return tileState;
     }
     public void onBreak(BlockBreakEvent event){}
+    public boolean onExplode(Location location, BlockExplodeEvent event){return true;}
     public void onUse(PlayerInteractEvent event){}
 
     public CustomBlock register(){

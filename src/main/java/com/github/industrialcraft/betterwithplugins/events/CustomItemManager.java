@@ -1,6 +1,7 @@
-package com.github.industrialcraft.betterwithplugins.items;
+package com.github.industrialcraft.betterwithplugins.events;
 
 import com.github.industrialcraft.betterwithplugins.BWPMain;
+import com.github.industrialcraft.betterwithplugins.items.CustomItem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

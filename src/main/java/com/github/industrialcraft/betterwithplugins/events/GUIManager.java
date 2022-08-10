@@ -1,6 +1,7 @@
-package com.github.industrialcraft.betterwithplugins.gui;
+package com.github.industrialcraft.betterwithplugins.events;
 
 import com.github.industrialcraft.betterwithplugins.BWPMain;
+import com.github.industrialcraft.betterwithplugins.gui.GUI;
 import com.github.industrialcraft.betterwithplugins.items.CustomItem;
 import com.github.industrialcraft.betterwithplugins.items.IGUIItem;
 import org.bukkit.event.EventHandler;

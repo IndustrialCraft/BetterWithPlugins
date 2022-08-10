@@ -27,11 +27,11 @@ public abstract class GUI {
         player.openInventory(create());
     }
 
-    boolean onClick(InventoryClickEvent event, CustomItem currentCustomItem){return false;}
-    boolean onDrag(InventoryDragEvent event, CustomItem cursorCustomItem){return false;}
-    void onClose(InventoryCloseEvent event){}
+    public boolean onClick(InventoryClickEvent event, CustomItem currentCustomItem){return false;}
+    public boolean onDrag(InventoryDragEvent event, CustomItem cursorCustomItem){return false;}
+    public void onClose(InventoryCloseEvent event){}
 
-    class InventoryDataHolder implements InventoryHolder{
+    public class InventoryDataHolder implements InventoryHolder{
         public final GUI gui;
         Inventory inventory;
         InventoryDataHolder(GUI gui) {

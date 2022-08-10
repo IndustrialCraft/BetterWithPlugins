@@ -1,11 +1,12 @@
 package com.github.industrialcraft.betterwithplugins;
 
-import com.github.industrialcraft.betterwithplugins.block.CustomBlockManager;
+import com.github.industrialcraft.betterwithplugins.events.CustomBlockManager;
 import com.github.industrialcraft.betterwithplugins.block.CustomBlockRegistry;
 import com.github.industrialcraft.betterwithplugins.commands.CustomGiveCommand;
 import com.github.industrialcraft.betterwithplugins.commands.CustomSetblockCommand;
-import com.github.industrialcraft.betterwithplugins.gui.GUIManager;
-import com.github.industrialcraft.betterwithplugins.items.CustomItemManager;
+import com.github.industrialcraft.betterwithplugins.events.GUIManager;
+import com.github.industrialcraft.betterwithplugins.events.CustomItemManager;
+import com.github.industrialcraft.betterwithplugins.events.GuiItemMoveCanceller;
 import com.github.industrialcraft.betterwithplugins.items.CustomItemRegistry;
 import com.github.industrialcraft.betterwithplugins.items.CustomModelDataAssigner;
 import com.github.industrialcraft.betterwithplugins.test.Test;
@@ -30,6 +31,7 @@ public final class BWPMain extends JavaPlugin {
         pm.registerEvents(new GUIManager(), this);
         pm.registerEvents(new CustomItemManager(), this);
         pm.registerEvents(new CustomBlockManager(), this);
+        pm.registerEvents(new GuiItemMoveCanceller(), this);
         new CustomGiveCommand().register("bwpgive");
         new CustomSetblockCommand().register("bwpsetblock");
         new Test();
