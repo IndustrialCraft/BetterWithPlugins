@@ -15,8 +15,12 @@ public class GUIManager implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event){
         CustomItem customClicked = BWPMain.getItemRegistry().fromStack(event.getCurrentItem());
-        if(customClicked != null && customClicked instanceof IGUIItem)
+        if(customClicked != null && customClicked instanceof IGUIItem) {
             event.setCancelled(true);
+            return;
+        }
+        if(event.getClickedInventory() == null)
+            return;
         InventoryHolder holder = event.getClickedInventory().getHolder();
         if(holder == null)
             return;
@@ -29,8 +33,10 @@ public class GUIManager implements Listener {
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event){
         CustomItem customCursor = BWPMain.getItemRegistry().fromStack(event.getOldCursor());
-        if(customCursor != null && customCursor instanceof IGUIItem)
+        if(customCursor != null && customCursor instanceof IGUIItem) {
             event.setCancelled(true);
+            return;
+        }
         InventoryHolder holder = event.getInventory().getHolder();
         if(holder == null)
             return;

@@ -52,6 +52,8 @@ public abstract class CustomItem {
         meta.setCustomModelData(this.customModelData);
     }
     public static String getCustomItemId(ItemStack item){
+        if(item == null)
+            return null;
         if(!item.hasItemMeta())
             return null;
         return getCustomItemId(item.getItemMeta());

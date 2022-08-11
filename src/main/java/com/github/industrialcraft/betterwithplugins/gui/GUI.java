@@ -6,25 +6,26 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
 
-public abstract class GUI {
+import java.util.function.Consumer;
+
+public class GUI<T> {
     private IInventoryCreator creator;
-    public GUI(String name, int size){
+    private Consumer<Inventory> creationHandler;
+    public GUI(String name, int size, Consumer<Inventory> creationHandler){
+        this.creationHandler = creationHandler;
         this.creator = new SizedInventoryCreator(size, name);
     }
-    public GUI(String name, InventoryType type){
+    public GUI(String name, InventoryType type, Consumer<Inventory> creationHandler){
+        this.creationHandler = creationHandler;
         this.creator = new TypedInventoryCreator(type, name);
     }
-    public Inventory create(){
-        InventoryDataHolder inventoryDataHolder = new InventoryDataHolder(this);
+    public Inventory create(T data){
+        InventoryDataHolder inventoryDataHolder = new InventoryDataHolder(this, data);
         Inventory inventory = creator.create(inventoryDataHolder);
         inventoryDataHolder.inventory = inventory;
+        creationHandler.accept(inventory);
         return inventory;
-    }
-    public void open(Player player){
-        player.openInventory(create());
     }
 
     public boolean onClick(InventoryClickEvent event, CustomItem currentCustomItem){return false;}
@@ -33,9 +34,11 @@ public abstract class GUI {
 
     public class InventoryDataHolder implements InventoryHolder{
         public final GUI gui;
-        Inventory inventory;
-        InventoryDataHolder(GUI gui) {
+        public final T data;
+        private Inventory inventory;
+        InventoryDataHolder(GUI gui, T data) {
             this.gui = gui;
+            this.data = data;
         }
         @Override
         public Inventory getInventory() {
