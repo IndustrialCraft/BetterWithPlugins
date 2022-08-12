@@ -26,7 +26,7 @@ public class CustomBlock {
         location.getWorld().setType(location, material);
         BlockState state = location.getWorld().getBlockState(location);
         TileState tileState = (TileState) state;
-        tileState.getPersistentDataContainer().set(BWPMain.getKeys().CUSTOM_ID_KEY, PersistentDataType.STRING, key.toString());
+        tileState.getPersistentDataContainer().set(BWPMain.getKeys().CUSTOM_ID, PersistentDataType.STRING, key.toString());
         tileState.update(true);
         if(this instanceof ITickingBlock){
             BWPMain.getBlockTicker().addLocationToTick(location.clone());
@@ -44,7 +44,7 @@ public class CustomBlock {
 
     public static String getCustomBlockId(BlockState state){
         if(state instanceof TileState tileState){
-            return tileState.getPersistentDataContainer().get(BWPMain.getKeys().CUSTOM_ID_KEY, PersistentDataType.STRING);
+            return tileState.getPersistentDataContainer().get(BWPMain.getKeys().CUSTOM_ID, PersistentDataType.STRING);
         }
         return null;
     }

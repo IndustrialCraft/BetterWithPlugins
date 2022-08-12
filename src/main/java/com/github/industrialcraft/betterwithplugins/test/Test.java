@@ -3,17 +3,15 @@ package com.github.industrialcraft.betterwithplugins.test;
 import com.github.industrialcraft.betterwithplugins.BWPMain;
 import com.github.industrialcraft.betterwithplugins.block.BasicTickingBlock;
 import com.github.industrialcraft.betterwithplugins.block.CustomBlock;
+import com.github.industrialcraft.betterwithplugins.energy.EnergyStoringItem;
 import com.github.industrialcraft.betterwithplugins.gui.GUI;
 import com.github.industrialcraft.betterwithplugins.items.BasicCustomItem;
 import com.github.industrialcraft.betterwithplugins.items.BasicGuiItem;
 import com.github.industrialcraft.betterwithplugins.items.CustomItem;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.block.*;
-import org.bukkit.block.data.Directional;
-import org.bukkit.block.data.Rotatable;
 import org.bukkit.block.data.type.Dispenser;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockExplodeEvent;
@@ -21,6 +19,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -33,6 +32,7 @@ public class Test {
     public final CustomBlock CUSTOM_TICKER;
     public final GUI CUSTOM_GUI;
     public final CustomItem GUI_FILLER;
+    public final CustomItem CUSTOM_BATTERY;
     public Test(){
         this.CUSTOM_STICK = new BasicCustomItem(BWPMain.getInstance().createKey("custom_stick"), Material.STICK, "Custom Stick"){
             @Override
@@ -92,5 +92,6 @@ public class Test {
             }
         });
         this.GUI_FILLER = new BasicGuiItem(BWPMain.getInstance().createKey("gui_filler")).register();
+        this.CUSTOM_BATTERY = new EnergyStoringItem(BWPMain.getInstance().createKey("custom_battery"), 1024, Material.STICK, "Custom Battery", "0/1024").register();
     }
 }

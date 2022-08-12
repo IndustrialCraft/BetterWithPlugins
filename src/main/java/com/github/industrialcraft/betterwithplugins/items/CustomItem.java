@@ -48,7 +48,7 @@ public abstract class CustomItem {
     public void onAttack(EntityDamageByEntityEvent event, Player player){}
 
     protected void setCustomItemData(ItemMeta meta){
-        meta.getPersistentDataContainer().set(BWPMain.getKeys().CUSTOM_ID_KEY, PersistentDataType.STRING, this.key.toString());
+        meta.getPersistentDataContainer().set(BWPMain.getKeys().CUSTOM_ID, PersistentDataType.STRING, this.key.toString());
         meta.setCustomModelData(this.customModelData);
     }
     public static String getCustomItemId(ItemStack item){
@@ -59,6 +59,6 @@ public abstract class CustomItem {
         return getCustomItemId(item.getItemMeta());
     }
     public static String getCustomItemId(ItemMeta meta){
-        return meta.getPersistentDataContainer().get(BWPMain.getKeys().CUSTOM_ID_KEY, PersistentDataType.STRING);
+        return meta.getPersistentDataContainer().get(BWPMain.getKeys().CUSTOM_ID, PersistentDataType.STRING);
     }
 }

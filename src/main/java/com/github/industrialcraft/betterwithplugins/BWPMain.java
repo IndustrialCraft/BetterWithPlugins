@@ -1,6 +1,7 @@
 package com.github.industrialcraft.betterwithplugins;
 
 import com.github.industrialcraft.betterwithplugins.block.BlockTicker;
+import com.github.industrialcraft.betterwithplugins.commands.ItemEnergyCommand;
 import com.github.industrialcraft.betterwithplugins.events.CustomBlockManager;
 import com.github.industrialcraft.betterwithplugins.block.CustomBlockRegistry;
 import com.github.industrialcraft.betterwithplugins.commands.CustomGiveCommand;
@@ -39,6 +40,7 @@ public final class BWPMain extends JavaPlugin {
         pm.registerEvents(this.blockTicker, this);
         new CustomGiveCommand().register("bwpgive");
         new CustomSetblockCommand().register("bwpsetblock");
+        new ItemEnergyCommand().register("bwpitemenergy");
         new Test();
     }
 

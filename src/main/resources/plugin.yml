@@ -8,3 +8,5 @@ commands:
     usage: /bwpgive <item> [count]
   bwpsetblock:
     usage: /bwpsetblock <block>
+  bwpitemenergy:
+    usage: /bwpitemenergy <mode> <energy>
