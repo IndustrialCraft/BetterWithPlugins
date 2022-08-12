@@ -28,6 +28,9 @@ public class CustomBlock {
         TileState tileState = (TileState) state;
         tileState.getPersistentDataContainer().set(BWPMain.getKeys().CUSTOM_ID_KEY, PersistentDataType.STRING, key.toString());
         tileState.update(true);
+        if(this instanceof ITickingBlock){
+            BWPMain.getBlockTicker().addLocationToTick(location.clone());
+        }
         return tileState;
     }
     public void onBreak(BlockBreakEvent event){}

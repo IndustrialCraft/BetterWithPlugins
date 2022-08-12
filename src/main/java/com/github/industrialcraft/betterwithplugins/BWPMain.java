@@ -1,5 +1,6 @@
 package com.github.industrialcraft.betterwithplugins;
 
+import com.github.industrialcraft.betterwithplugins.block.BlockTicker;
 import com.github.industrialcraft.betterwithplugins.events.CustomBlockManager;
 import com.github.industrialcraft.betterwithplugins.block.CustomBlockRegistry;
 import com.github.industrialcraft.betterwithplugins.commands.CustomGiveCommand;
@@ -20,6 +21,7 @@ public final class BWPMain extends JavaPlugin {
     private CustomItemRegistry itemRegistry;
     private CustomBlockRegistry blockRegistry;
     private CustomModelDataAssigner customModelDataAssigner;
+    private BlockTicker blockTicker;
     @Override
     public void onEnable() {
         this.keys = new Keys(this);
@@ -27,11 +29,14 @@ public final class BWPMain extends JavaPlugin {
         this.customModelDataAssigner.load(getConfig());
         this.itemRegistry = new CustomItemRegistry();
         this.blockRegistry = new CustomBlockRegistry();
+        this.blockTicker = new BlockTicker();
+        this.blockTicker.initTicking(this, 5);
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new GUIManager(), this);
         pm.registerEvents(new CustomItemManager(), this);
         pm.registerEvents(new CustomBlockManager(), this);
         pm.registerEvents(new GuiItemMoveCanceller(), this);
+        pm.registerEvents(this.blockTicker, this);
         new CustomGiveCommand().register("bwpgive");
         new CustomSetblockCommand().register("bwpsetblock");
         new Test();
@@ -59,5 +64,8 @@ public final class BWPMain extends JavaPlugin {
     }
     public static CustomModelDataAssigner getCustomModelDataAssigner(){
         return getInstance().customModelDataAssigner;
+    }
+    public static BlockTicker getBlockTicker(){
+        return getInstance().blockTicker;
     }
 }

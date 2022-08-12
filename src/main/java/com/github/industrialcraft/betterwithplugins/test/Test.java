@@ -1,6 +1,7 @@
 package com.github.industrialcraft.betterwithplugins.test;
 
 import com.github.industrialcraft.betterwithplugins.BWPMain;
+import com.github.industrialcraft.betterwithplugins.block.BasicTickingBlock;
 import com.github.industrialcraft.betterwithplugins.block.CustomBlock;
 import com.github.industrialcraft.betterwithplugins.gui.GUI;
 import com.github.industrialcraft.betterwithplugins.items.BasicCustomItem;
@@ -9,6 +10,7 @@ import com.github.industrialcraft.betterwithplugins.items.CustomItem;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
 import org.bukkit.block.*;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Rotatable;
@@ -28,6 +30,7 @@ public class Test {
     public final CustomItem CUSTOM_STICK;
     public final CustomItem CUSTOM_APPLE;
     public final CustomBlock CUSTOM_DISPLAYER;
+    public final CustomBlock CUSTOM_TICKER;
     public final GUI CUSTOM_GUI;
     public final CustomItem GUI_FILLER;
     public Test(){
@@ -73,6 +76,12 @@ public class Test {
                 state.setBlockData(dispenser);
                 state.update(true);
                 return state;
+            }
+        }.register();
+        this.CUSTOM_TICKER = new BasicTickingBlock(BWPMain.getInstance().createKey("custom_ticker"), Material.BELL){
+            @Override
+            public void tick(Block block) {
+                block.getLocation().getWorld().spawnParticle(Particle.ELECTRIC_SPARK, block.getLocation().add(0, 1, 0), 5);
             }
         }.register();
         //this.CUSTOM_GUI = new GUI("Custom GUI", InventoryType.DROPPER, (inventory) -> inventory.addItem(Test.this.GUI_FILLER.create(8)));
