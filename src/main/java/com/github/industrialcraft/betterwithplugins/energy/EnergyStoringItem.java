@@ -17,6 +17,14 @@ public class EnergyStoringItem extends BasicCustomItem implements IItemEnergySto
         super(key, material, name, lore);
         this.capacity = capacity;
     }
+
+    @Override
+    public ItemStack create(int count) {
+        ItemStack stack = super.create(count);
+        setStoredEnergy(stack, 0);
+        return stack;
+    }
+
     @Override
     public int getEnergyCapacity(ItemStack item) {
         return capacity;

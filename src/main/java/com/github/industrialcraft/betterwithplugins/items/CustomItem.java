@@ -5,10 +5,12 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -37,6 +39,11 @@ public abstract class CustomItem {
         this.customModelData = BWPMain.getItemRegistry().register(this);
         return this;
     }
+
+    public RecipeChoice.ExactChoice toRecipeChoice(){
+        return new RecipeChoice.ExactChoice(create());
+    }
+
     public int getCustomModelData() {
         return customModelData;
     }
@@ -46,6 +53,7 @@ public abstract class CustomItem {
     public void onEntityUse(PlayerInteractEntityEvent event){}
     public void onEat(PlayerItemConsumeEvent event){}
     public void onAttack(EntityDamageByEntityEvent event, Player player){}
+    public boolean onClickAnotherItem(InventoryClickEvent event){return false;}
 
     protected void setCustomItemData(ItemMeta meta){
         meta.getPersistentDataContainer().set(BWPMain.getKeys().CUSTOM_ID, PersistentDataType.STRING, this.key.toString());

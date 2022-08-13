@@ -14,19 +14,24 @@ import org.bukkit.inventory.InventoryHolder;
 public class GUIManager implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event){
+        if(event.getClickedInventory() == null)
+            return;
         CustomItem customClicked = BWPMain.getItemRegistry().fromStack(event.getCurrentItem());
+        CustomItem customCursor = BWPMain.getItemRegistry().fromStack(event.getCursor());
         if(customClicked != null && customClicked instanceof IGUIItem) {
             event.setCancelled(true);
             return;
         }
-        if(event.getClickedInventory() == null)
+        if(customCursor != null && customCursor.onClickAnotherItem(event)){
+            event.setCancelled(true);
             return;
+        }
         InventoryHolder holder = event.getClickedInventory().getHolder();
         if(holder == null)
             return;
         if(holder instanceof GUI.InventoryDataHolder dataHolder){
             GUI gui = dataHolder.gui;
-            if(gui.onClick(event, customClicked))
+            if(gui.onClick(event, customClicked, customCursor))
                 event.setCancelled(true);
         }
     }

@@ -8,6 +8,7 @@ import com.github.industrialcraft.betterwithplugins.gui.GUI;
 import com.github.industrialcraft.betterwithplugins.items.BasicCustomItem;
 import com.github.industrialcraft.betterwithplugins.items.BasicGuiItem;
 import com.github.industrialcraft.betterwithplugins.items.CustomItem;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -20,6 +21,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 

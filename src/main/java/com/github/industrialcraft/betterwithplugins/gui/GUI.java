@@ -28,7 +28,7 @@ public class GUI<T> {
         return inventory;
     }
 
-    public boolean onClick(InventoryClickEvent event, CustomItem currentCustomItem){return false;}
+    public boolean onClick(InventoryClickEvent event, CustomItem currentCustomItem, CustomItem cursorCustomItem){return false;}
     public boolean onDrag(InventoryDragEvent event, CustomItem cursorCustomItem){return false;}
     public void onClose(InventoryCloseEvent event){}
 
