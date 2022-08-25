@@ -9,32 +9,27 @@ import org.bukkit.inventory.InventoryHolder;
 
 import java.util.function.Consumer;
 
-public class GUI<T> {
-    private IInventoryCreator creator;
+public abstract class GUI<T> {
     private Consumer<Inventory> creationHandler;
-    public GUI(String name, int size, Consumer<Inventory> creationHandler){
+    public GUI(Consumer<Inventory> creationHandler){
         this.creationHandler = creationHandler;
-        this.creator = new SizedInventoryCreator(size, name);
-    }
-    public GUI(String name, InventoryType type, Consumer<Inventory> creationHandler){
-        this.creationHandler = creationHandler;
-        this.creator = new TypedInventoryCreator(type, name);
     }
     public Inventory create(T data){
         InventoryDataHolder inventoryDataHolder = new InventoryDataHolder(this, data);
-        Inventory inventory = creator.create(inventoryDataHolder);
+        Inventory inventory = createEmpty(inventoryDataHolder);
         inventoryDataHolder.inventory = inventory;
         creationHandler.accept(inventory);
         return inventory;
     }
+    protected abstract Inventory createEmpty(InventoryDataHolder<T> dataHolder);
 
     public boolean onClick(InventoryClickEvent event, CustomItem currentCustomItem, CustomItem cursorCustomItem){return false;}
     public boolean onDrag(InventoryDragEvent event, CustomItem cursorCustomItem){return false;}
     public void onClose(InventoryCloseEvent event){}
 
-    public class InventoryDataHolder implements InventoryHolder{
+    public static class InventoryDataHolder<T> implements InventoryHolder{
         public final GUI gui;
-        public final T data;
+        public T data;
         private Inventory inventory;
         InventoryDataHolder(GUI gui, T data) {
             this.gui = gui;
@@ -43,26 +38,6 @@ public class GUI<T> {
         @Override
         public Inventory getInventory() {
             return inventory;
-        }
-    }
-
-    private interface IInventoryCreator {
-        Inventory create(InventoryHolder holder);
-    }
-    private record SizedInventoryCreator(int size, String name) implements IInventoryCreator {
-        @Override
-        public Inventory create(InventoryHolder holder) {
-            return Bukkit.createInventory(holder, size, name);
-        }
-    }
-    private record TypedInventoryCreator(InventoryType type, String name) implements IInventoryCreator {
-        private TypedInventoryCreator {
-            if (!type.isCreatable())
-                throw new IllegalArgumentException("type " + type.name() + " is not creatable");
-        }
-        @Override
-        public Inventory create(InventoryHolder holder) {
-            return Bukkit.createInventory(holder, type, name);
         }
     }
 }

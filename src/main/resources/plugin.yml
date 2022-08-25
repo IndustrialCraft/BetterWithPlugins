@@ -10,3 +10,5 @@ commands:
     usage: /bwpsetblock <block>
   bwpitemenergy:
     usage: /bwpitemenergy <mode> <energy>
+  bwprecipeview:
+    usage: /bwprecipeview <item>

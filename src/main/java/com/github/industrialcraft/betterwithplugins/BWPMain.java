@@ -2,6 +2,7 @@ package com.github.industrialcraft.betterwithplugins;
 
 import com.github.industrialcraft.betterwithplugins.block.BlockTicker;
 import com.github.industrialcraft.betterwithplugins.commands.ItemEnergyCommand;
+import com.github.industrialcraft.betterwithplugins.commands.ShowRecipeCommand;
 import com.github.industrialcraft.betterwithplugins.events.CustomBlockManager;
 import com.github.industrialcraft.betterwithplugins.block.CustomBlockRegistry;
 import com.github.industrialcraft.betterwithplugins.commands.CustomGiveCommand;
@@ -11,8 +12,10 @@ import com.github.industrialcraft.betterwithplugins.events.CustomItemManager;
 import com.github.industrialcraft.betterwithplugins.events.GuiItemMoveCanceller;
 import com.github.industrialcraft.betterwithplugins.items.CustomItemRegistry;
 import com.github.industrialcraft.betterwithplugins.items.CustomModelDataAssigner;
+import com.github.industrialcraft.betterwithplugins.recipeviewer.RecipeViewerGUI;
 import com.github.industrialcraft.betterwithplugins.test.Test;
 import com.github.industrialcraft.betterwithplugins.util.Keys;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,6 +44,7 @@ public final class BWPMain extends JavaPlugin {
         new CustomGiveCommand().register("bwpgive");
         new CustomSetblockCommand().register("bwpsetblock");
         new ItemEnergyCommand().register("bwpitemenergy");
+        new ShowRecipeCommand().register("bwprecipeview");
         new Test();
     }
 

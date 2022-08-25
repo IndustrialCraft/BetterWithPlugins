@@ -69,4 +69,6 @@ public abstract class CustomItem {
     public static String getCustomItemId(ItemMeta meta){
         return meta.getPersistentDataContainer().get(BWPMain.getKeys().CUSTOM_ID, PersistentDataType.STRING);
     }
+
+    public abstract String getName();
 }

@@ -88,12 +88,17 @@ public class Test {
             }
         }.register();
         //this.CUSTOM_GUI = new GUI("Custom GUI", InventoryType.DROPPER, (inventory) -> inventory.addItem(Test.this.GUI_FILLER.create(8)));
-        this.CUSTOM_GUI = new GUI("Custom GUI", InventoryType.DROPPER, new Consumer<Inventory>() {
+        this.CUSTOM_GUI = new GUI(new Consumer<Inventory>() {
             @Override
             public void accept(Inventory itemStacks) {
                 itemStacks.addItem(Test.this.GUI_FILLER.create(8));
             }
-        });
+        }) {
+            @Override
+            protected Inventory createEmpty(InventoryDataHolder dataHolder) {
+                return Bukkit.createInventory(dataHolder, InventoryType.DROPPER, "Custom GUI");
+            }
+        };
         this.GUI_FILLER = new BasicGuiItem(BWPMain.getInstance().createKey("gui_filler")).register();
         this.CUSTOM_BATTERY = new EnergyStoringItem(BWPMain.getInstance().createKey("custom_battery"), 1024, Material.STICK, "Custom Battery", "0/1024").register();
     }

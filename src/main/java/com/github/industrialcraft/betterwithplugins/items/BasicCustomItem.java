@@ -33,4 +33,9 @@ public class BasicCustomItem extends CustomItem{
     public int getMaxStackSize() {
         return material.getMaxStackSize();
     }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
 }

@@ -26,4 +26,9 @@ public class BasicGuiItem extends CustomItem implements IGUIItem{
     public int getMaxStackSize() {
         return 1;
     }
+
+    @Override
+    public String getName() {
+        return "<GUI ITEM>";
+    }
 }
